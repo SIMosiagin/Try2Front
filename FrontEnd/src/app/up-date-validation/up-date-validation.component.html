@@ -1,0 +1,100 @@
+<ngForm class="updateValidationList">
+  <div>
+    <label class="updateValidationListLable">Update validation {{validation.validationList.name}}</label>
+    <label class="validationParamListLabel">Validation param list</label>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Is multiplate</th>
+        <th>Validation list</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let valPL of validationParamsList">
+        <td>
+          <input type="text" [(ngModel)] = "valPL.name" [ngModelOptions]="{standalone: true}">
+        </td>
+        <td>
+          <input type="text" [(ngModel)] = "valPL.type" [ngModelOptions]="{standalone: true}">
+        </td>
+        <td>
+          <input type="checkBox" class="chBoxMultiplate" [checked]="valPL.isMultiplate"
+                 (change)="valPL.isMultiplate = !valPL.isMultiplate" />
+        </td>
+        <td>{{valPL.validationList.name}}</td>
+        <button class="removeVal" (click)="removeValPL(valPL)">Remove</button>
+      </tr>
+      </tbody>
+    </table>
+    <br><button (click)="addValPL()">Add params list</button>
+  </div>
+
+
+  <div>
+    <label>Sql template</label>
+    <input type="text" [(ngModel)]="validationSqlTemplate.sqlText" [ngModelOptions]="{standalone: true}">
+    <!--(change)="setSQLTemplate($event)"-->
+  </div>
+
+  <div>
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th>Name</th>
+        <th>System</th>
+        <th>Validation param list</th>
+
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let valParams of validationParams">
+        <td>
+          <p class="radioLabel"><input (change)="setTypeValParams('manual',valParams)" type="radio" name="radioBT" class="radioSys" checked>___Manual</p>
+          <p class="radioLabel"><input (change)="setTypeValParams('column',valParams)" type="radio" name="radioBT" class="radioSys">___Column</p>
+          <p class="radioLabel"><input (change)="setTypeValParams('table',valParams)" type="radio" name="radioBT" class="radioSys">___Table</p>
+        </td>
+
+        <td *ngIf="valParams.tag == 'manual'">
+          <input type="text" [(ngModel)] = "valParams.value" [ngModelOptions]="{standalone: true}">
+        </td>
+
+
+        <td *ngIf="valParams.tag == 'column'">
+          <select class="selectCol" (change)="setMapColValParams($event, valParams)">
+            <option value="" disabled>Select column</option>
+            <option *ngFor="let mc of mappingColumns" [value]="mc.id">
+              {{mc.name}}
+            </option>
+          </select>
+        </td>
+
+        <td *ngIf="valParams.tag == 'table'" class="selectTable">
+          {{valParams.value}}
+        </td>
+
+
+        <td>
+          <select class="selectValList"  (change)="setValParamListIntoValParams($event, valParams)">
+
+            <option *ngIf="valParams.validationParamList != null"
+                    [value]="valParams.validationParamList.name" >{{valParams.validationParamList.name}}</option>
+
+            <option *ngFor="let vpl of validationParamsList" [value]="vpl.name">
+              {{vpl.name}}
+            </option>
+          </select>
+        </td>
+        <button (click)="test(valParams)">log</button>
+        <button class="removeVal" (click)="removeValParams(valParams)">Remove</button>
+      </tr>
+      </tbody>
+    </table>
+    <br><button (click)="addValParams()">Add params</button>
+  </div>
+
+  <button (click)="saveValidation()">Done</button>
+
+
+</ngForm>

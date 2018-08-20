@@ -1,0 +1,28 @@
+<ngForm class="mappingtest">
+  <label class="mappingSkills">Maping fields</label>
+
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th >Excel skill group</th>
+      <th >Excel skill</th>
+      <th >Table field</th>
+      <th >Table type</th>
+      <th >Lenght</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let mapF of mappingColumnsComp">
+      <td >{{mapF.xlsxGroup}}</td>
+      <td >{{mapF.xlsxSkill}}</td>
+
+      <td><input type="text" [(ngModel)] = "mapF.name" [ngModelOptions]="{standalone: true}"></td>
+      <td><input type="text" [(ngModel)] = "mapF.type" [ngModelOptions]="{standalone: true}"></td>
+      <td><input [max]="4000" [min]="3" type="number"(change)="setMapFieldLenght(mapF)" [(ngModel)] = "mapF.size" [ngModelOptions]="{standalone: true}"></td>
+
+    </tr>
+    </tbody>
+  </table>
+  <button (click)="validation()">Validation</button>
+</ngForm>

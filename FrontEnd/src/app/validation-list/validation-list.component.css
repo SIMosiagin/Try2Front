@@ -1,0 +1,8 @@
+.selectValType {
+  display: inherit;
+}
+
+.chBoxIsManual {
+  opacity: 1;
+  pointer-events: inherit;
+}

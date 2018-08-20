@@ -1,0 +1,8 @@
+.selected-table {
+  color: black;
+  font-size: 15px;
+}
+
+.select-transit-table {
+  display: inherit;
+}

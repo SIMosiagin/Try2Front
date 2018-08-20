@@ -1,0 +1,27 @@
+
+.chBoxMultiplate{
+  opacity: 1;
+  pointer-events: inherit;
+}
+
+.selectValList{
+  display: inherit;
+}
+
+.radioSys {
+  opacity: 1;
+  pointer-events: inherit;
+}
+
+.radioLabel {
+  color: black;
+  font-size: 10px;
+}
+
+.selectCol {
+  display: inherit;
+}
+
+.selectTable {
+  display: inherit;
+}

@@ -1,0 +1,12 @@
+<div>
+  <br> <label class="selected-table" >Selected table {{selectedTransitTableComp}} </label>
+  <select class="select-transit-table" (change)="setTransitTable($event)">
+    <option value="" disabled>Choose table</option>
+    <option *ngFor="let transitT of tableLists" [value]="transitT.name">
+      {{transitT.name}}
+    </option>
+  </select>
+  <app-add-table></app-add-table>
+</div>
+<button type="button" (click)="goToMapping()">goToMapping</button>
+

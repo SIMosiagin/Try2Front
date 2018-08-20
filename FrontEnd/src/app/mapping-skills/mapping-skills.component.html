@@ -1,0 +1,36 @@
+<div class="mappingtest">
+  <label class="mappingSkills">Maping skills</label>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Excel skill group</th>
+      <th>Excel skill</th>
+      <th>DB skill group</th>
+      <th>DB skill</th>
+      <th>DB skill description</th>
+
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let mapS of mappingColumnsComp">
+      <td >{{mapS.xlsxGroup}}</td>
+      <td >{{mapS.xlsxSkill}}</td>
+
+      <td *ngIf="mapS.skillDescription.skillGroup != null">{{mapS.skillDescription.skillGroup.name}}</td>
+      <td *ngIf="mapS.skillDescription.skillGroup == null"></td>
+
+      <td >{{mapS.skillDescription.name}}</td>
+      <td >{{mapS.skillDescription.description}}</td>
+
+      <app-update-skill [skill]="mapS.skillDescription"></app-update-skill>
+      <!--, [skillGroup]="skillGroups"-->
+
+
+      <button class="removeSkill" (click)="removeSkill(mapS)">Remove</button>
+
+    </tr>
+    </tbody>
+  </table>
+
+  <br><button (click)="goToMappingFields()">MappingFields</button>
+</div>

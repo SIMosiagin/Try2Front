@@ -1,0 +1,32 @@
+<div *ngIf="isNotFileSelected; then thenBlock else elseBlock"></div>
+<ng-template #thenBlock>
+  <title>Отправка файла на сервер</title>
+  <input type="file" (change)="onFileSelected($event)">
+  <button type="button" (click)="uploadExcel()">Upload</button>
+  <!--<input type="file" class="inputFolder" webkitdirectory="">-->
+  <button type="button" (click)="TTT()">Next</button>
+</ng-template>
+<ng-template #elseBlock>
+
+  <div class="col-md-6">
+    <!--<h2>Selected file {{selectedFile.name}}</h2>-->
+    <table class="table table-striped">
+      <thead>
+      <tr>
+        <th class="hidden">Id</th>
+        <th>Name</th>
+        <th>Action</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr *ngFor="let sheet of sheetsCom">
+        <td class="hidden">{{sheet.id}}</td>
+        <td>{{sheet.name}}</td>
+        <td><button class="btn btn-danger" routerLink="/selectingTraisitTable"
+                    (click)="onSelectSheet(sheet)"> Select sheet</button></td>
+      </tr>
+      </tbody>
+    </table>
+  </div>
+
+</ng-template>

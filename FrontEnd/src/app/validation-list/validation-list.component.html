@@ -1,0 +1,56 @@
+<ngForm class="ValidationList">
+  <label class="mappingSkills">Validations</label>
+  <table class="table table-striped">
+    <thead>
+    <tr>
+      <th>Name</th>
+      <th>Table</th>
+      <th>Type</th>
+      <th>Is manual</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr *ngFor="let val of validation">
+      <td>
+        <input type="text" [(ngModel)] = "val.validationList.name" [ngModelOptions]="{standalone: true}">
+      </td>
+
+      <td>{{val.tableList.name}}</td>
+
+
+      <td>
+        <select class="selectValType"  (change)="setType($event, val)">
+
+          <option *ngIf="val.validationList.validationType == null"  value="" >Select type</option>
+
+          <option *ngIf="val.validationList.validationType != null" [selected]="val.validationList.validationType.name"
+                  [value]="val.validationList.validationType.name" disabled>{{val.validationList.validationType.name}}</option>
+          <option *ngFor="let vt of validationType" [value]="vt.name">
+            {{vt.name}}
+          </option>
+        </select>
+
+
+        <!--<select class="selectValType" (change)="setType($event, val.validationList)">-->
+          <!--<option value="" disabled>Select type</option>-->
+          <!--<option value="table lvl">table_lvl</option>-->
+          <!--<option value="field lvl">field_lvl</option>-->
+        <!--</select>-->
+      </td>
+
+      <td>
+        <input type="checkBox" class="chBoxIsManual"
+               [checked]="val.validationList.isManual"
+               (change)="val.validationList.isManual = !valList.validationList.isManual" />
+      </td>
+
+      <button class="removeVal" (click)="removeVal(val)">Remove</button>
+      <button class="updateVal" (click)="updateVal(val)">Update</button>
+
+    </tr>
+    </tbody>
+  </table>
+
+  <br><button (click)="addValidationList()">Add validation</button>
+  <br><button (click)="executeValidation()">Execute validation</button>
+</ngForm>
